@@ -159,30 +159,50 @@ def manual_check(message):
     check_birthdays()
     bot.reply_to(message, "✅ Проверка завершена!")
 
+# Словарь для преобразования русских названий месяцев
+MONTHS_RU = {
+    'января': 1, 'февраля': 2, 'марта': 3, 'апреля': 4,
+    'мая': 5, 'июня': 6, 'июля': 7, 'августа': 8,
+    'сентября': 9, 'октября': 10, 'ноября': 11, 'декабря': 12
+}
+
 @bot.message_handler(commands=['add'])
 def add_birthday(message):
     """Обработчик команды /add для добавления дня рождения"""
     try:
         parts = message.text.split(maxsplit=2)
         if len(parts) < 3:
-            bot.reply_to(message, "❌ Использование: /add <Имя> <Дата>\nПример: /add Иван 1990-05-15")
+            bot.reply_to(message, "❌ Использование: /add <Имя> <Дата>\nПример: /add Иван 1990-05-15 или /add Иван 20 апреля")
             return
         
         name = parts[1]
-        date_str = parts[2]
+        date_str = parts[2].lower()  # Приводим к нижнему регистру для обработки русских месяцев
         
-        # Парсим дату
-        try:
-            if '-' in date_str:
-                birth_date = datetime.strptime(date_str, '%Y-%m-%d').date()
-                db_format = birth_date.strftime('%Y-%m-%d')
-            elif '.' in date_str:
-                birth_date = datetime.strptime(date_str, '%d.%m.%Y').date()
-                db_format = birth_date.strftime('%Y-%m-%d')
-            else:
-                raise ValueError("Неизвестный формат даты")
-        except ValueError:
-            bot.reply_to(message, "❌ Неверный формат даты. Используйте YYYY-MM-DD или DD.MM.YYYY")
+        birth_date = None
+        db_format = None
+        
+        # Парсим дату: поддерживаем YYYY-MM-DD, DD.MM.YYYY и "ДД месяц"
+        if '-' in date_str:
+            birth_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+            db_format = birth_date.strftime('%Y-%m-%d')
+        elif '.' in date_str:
+            birth_date = datetime.strptime(date_str, '%d.%m.%Y').date()
+            db_format = birth_date.strftime('%Y-%m-%d')
+        else:
+            # Пробуем распарсить формат "ДД месяц" (например, "20 апреля")
+            date_parts = date_str.split()
+            if len(date_parts) == 2:
+                day = int(date_parts[0])
+                month_name = date_parts[1]
+                if month_name in MONTHS_RU:
+                    month = MONTHS_RU[month_name]
+                    # Используем текущий год, так как год не указан
+                    current_year = datetime.now().year
+                    birth_date = datetime(current_year, month, day).date()
+                    db_format = birth_date.strftime('%Y-%m-%d')
+        
+        if birth_date is None:
+            bot.reply_to(message, "❌ Неверный формат даты. Используйте YYYY-MM-DD, DD.MM.YYYY или 'ДД месяц' (например, 20 апреля)")
             return
         
         # Добавляем в базу данных
