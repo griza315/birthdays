@@ -1,5 +1,5 @@
-```
-# Dependencies
+```python
+# Python
 __pycache__/
 *.pyc
 *.pyo
@@ -8,75 +8,41 @@ __pycache__/
 env/
 venv/
 .venv/
-.venv.bak/
-pip-log.txt
-pip-selfcheck.json
-requirements-local.txt
-requirements-test.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
-.git/
-.mypy_cache/
-.pytest_cache/
-.hypothesis/
-
-# Distribution / packaging
-.Python
-_build/
-buck-out/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Environment
+.ENV
+.ENV.local
 .env
 .env.local
-.env.dev
-.env.test
-.env.prod
-.env.backup
-.env.example
-.env.sample
-.env.template
-.env.default
-.env.local.example
-.env.test.example
-.env.development
-.env.production
-.env.staging
-.env.backup
-.env.save
-.env~
-.env.local~
-.env.dev~
-.env.test~
-.env.prod~
+.env.*
 
-# Editors
+# Logs
+*.log
+
+# Coverage
+.coverage
+coverage/
+htmlcov/
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
+*.tmp
+
+# Build and distribution
+dist/
+build/
+*.egg-info/
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+
+# OS
 .DS_Store
 Thumbs.db
 ```
