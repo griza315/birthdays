@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  birthday-bot:
+    build: .
+    container_name: telegram-birthday-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - CHAT_ID=${CHAT_ID}
+      - DB_PATH=/app/birthdays.db
+    volumes:
+      - bot-data:/app
+    networks:
+      - bot-network
+
+volumes:
+  bot-data:
+    name: birthday-bot-data
+
+networks:
+  bot-network:
+    driver: bridge

@@ -1,5 +1,5 @@
 ```
-# Python
+# Dependencies
 __pycache__/
 *.pyc
 *.pyo
@@ -8,68 +8,75 @@ __pycache__/
 env/
 venv/
 .venv/
-.ENV
-.ENV.local
-.env
-.env.local
-.env.*
+.venv.bak/
+pip-log.txt
+pip-selfcheck.json
+requirements-local.txt
+requirements-test.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/
 .mypy_cache/
 .pytest_cache/
-.coverage
-coverage/
-htmlcov/
+.hypothesis/
 
-# Build artifacts
+# Distribution / packaging
+.Python
+_build/
+buck-out/
 build/
+develop-eggs/
 dist/
-*.egg
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.egg-info/
-*.so
-*.dylib
-*.dll
-*.exe
-*.out
+.installed.cfg
+*.egg
+MANIFEST
 
-# Logs
-*.log
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Environment
+.env
+.env.local
+.env.dev
+.env.test
+.env.prod
+.env.backup
+.env.example
+.env.sample
+.env.template
+.env.default
+.env.local.example
+.env.test.example
+.env.development
+.env.production
+.env.staging
+.env.backup
+.env.save
+.env~
+.env.local~
+.env.dev~
+.env.test~
+.env.prod~
 
 # Editors
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
-
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
+*~
+.DS_Store
+Thumbs.db
 ```
